@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 public class ShowImageTest{
 	public static void Main(String[]args){		
 		PictureBox pb1 = new PictureBox();            
-		pb1.ImageLocation = "a.jpg";
+		pb1.ImageLocation = args[0];
 		pb1.SizeMode = PictureBoxSizeMode.AutoSize;
 
 		Form frm = new Form();

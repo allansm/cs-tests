@@ -6,8 +6,8 @@ public class ShellTest{
 		string txt = "/C tasklist";
 		System.Diagnostics.Process.Start("CMD.exe",txt);
 	}
-
-	public static void Main(){
+	
+	void test2(){
 		Process p = new Process();
 		p.StartInfo.CreateNoWindow = true;
             	p.StartInfo.RedirectStandardOutput = true;
@@ -21,5 +21,29 @@ public class ShellTest{
 		while ((line = p.StandardOutput.ReadLine()) != null){
 			Console.WriteLine(line);
 		}
+
+	}
+
+	string cmd(string command){
+		Process p = new Process();
+		p.StartInfo.CreateNoWindow = true;
+            	p.StartInfo.RedirectStandardOutput = true;
+            	p.StartInfo.UseShellExecute = false;
+            	p.StartInfo.Arguments = "/c "+command;
+            	p.StartInfo.FileName = @"C:\Windows\System32\cmd.exe";
+            	p.Start();
+
+            	string line;
+		string fulltxt = "";
+		while ((line = p.StandardOutput.ReadLine()) != null){
+			fulltxt +=line+"\n";
+		}
+		return fulltxt;
+	
+	}
+
+	public static void Main(){
+		string stxt = new ShellTest().cmd("dir");
+		Console.WriteLine(stxt);
 	}
 }
