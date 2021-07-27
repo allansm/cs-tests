@@ -2,44 +2,25 @@ using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 
-public class JsonTest{
+public class JsonTest{	
+	//serializer.Serialize(result)
 
-	void example(){
+	static Dictionary<string,object> getJson(string json){
 		JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-		string json = @"{ ""nome"" : ""Jose Carlos"", ""sobrenome"" : ""Macoratti"", ""email"": ""macoratti@yahoo.com"" }";
-		dynamic resultado = serializer.DeserializeObject(json);
-
-		Console.WriteLine("  ==  Resultado da leitura do arquivo JSON  == ");
-		Console.WriteLine("");
-
-		foreach (KeyValuePair<string, object> entry in resultado){
-			var key = entry.Key;
-			var value = entry.Value as string;
-			Console.WriteLine(String.Format("{0} : {1}",key, value));
-		}
-
-		Console.WriteLine("");
-		Console.WriteLine(serializer.Serialize(resultado));
-		Console.WriteLine("");
-		Console.ReadKey();
-
-	}
-
-	static Dictionary<string,string> test(){
-		JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-		string json = "{ \"name\" : \"allan\",\"lastname\" : \"sm\" }";
+		//string json = "{ \"name\" : \"allan\",\"lastname\" : \"sm\" }";
 		dynamic result = serializer.DeserializeObject(json);
 		
-		Dictionary<string,string> arr = new Dictionary<string,string>();
+		return result;
+		/*Dictionary<string,string> arr = new Dictionary<string,string>();
 
 		foreach (KeyValuePair<string, object> entry in result){
 			var key = entry.Key;
-			var value = entry.Value as string;
+			var value = entry.Value;
 
 			arr[key] = value;
 		}
 
-		return arr;
+		return arr;*/
 
 	}
 
@@ -52,6 +33,7 @@ public class JsonTest{
 
 	}
 	public static void Main(){
-		Console.WriteLine(test()["name"]+" "+test()["lastname"]);
+		string js1 = getJson("{'id':0,'result':\"{'name':'allan'}\"}")["result"] as string;
+		Console.WriteLine(getJson(js1)["name"]);
 	}
 }
