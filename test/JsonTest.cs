@@ -7,20 +7,21 @@ public class JsonTest{
 
 	static Dictionary<string,object> getJson(string json){
 		JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-		//string json = "{ \"name\" : \"allan\",\"lastname\" : \"sm\" }";
 		dynamic result = serializer.DeserializeObject(json);
 		
-		return result;
-		/*Dictionary<string,string> arr = new Dictionary<string,string>();
+		return result;	
+	}
 
-		foreach (KeyValuePair<string, object> entry in result){
+	static void showJson(string json){
+		
+		Dictionary<string,string> arr = new Dictionary<string,string>();
+
+		foreach (KeyValuePair<string, object> entry in getJson(json)){
 			var key = entry.Key;
-			var value = entry.Value;
-
-			arr[key] = value;
+			var value = entry.Value as string;
+			
+			Console.WriteLine(key+":"+value);
 		}
-
-		return arr;*/
 
 	}
 
@@ -32,8 +33,8 @@ public class JsonTest{
 		Console.WriteLine(arr["name"]+" "+arr["lastname"]);
 
 	}
+
 	public static void Main(){
-		string js1 = getJson("{'id':0,'result':\"{'name':'allan'}\"}")["result"] as string;
-		Console.WriteLine(getJson(js1)["name"]);
+		showJson("{'name':'allan','lastname':'sm'}");
 	}
 }
