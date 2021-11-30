@@ -1,14 +1,24 @@
 using System;
 
 public class TimeTest{
-	public static void Main(){
+	public static string clock(){
 		DateTime now = DateTime.Now;
-		DateTime utc = DateTime.UtcNow;
+
+		return $"{now:HH:mm:ss}";	
+	}
+
+	public static long timeToMillis(){
+		return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();	
+	}
+
+	public static void Main(){
+		Console.WriteLine(clock());
+		long start = timeToMillis();
 		
-		string t1 = $"{now:HH:mm:ss}";
-		string t2 = $"{utc:HH:mm:ss}";
+		while(timeToMillis()-start < 10000){
+			//Console.WriteLine((timeToMillis()-start)/1000);	
+		}
 		
-		Console.WriteLine("utc:"+t2);
-		Console.WriteLine("localtime:"+t1);
+		Console.WriteLine(clock());
 	}
 }
